@@ -5,7 +5,9 @@ namespace App\Http\Controllers;
 use App\Models\FotoSection;
 use App\Models\HeroSection;
 use App\Models\MitraSection;
+use App\Models\PaketSection;
 use Illuminate\Http\Request;
+use App\Models\KontakSection;
 use App\Models\ProdukSection;
 use App\Models\ArtikelSection;
 use App\Models\SejarahSection;
@@ -18,8 +20,10 @@ class PageController extends Controller
         $heroSlides = HeroSection::all();
         $mitraSections = MitraSection::all();
         $dokumentasiSections = DokumentasiSection::orderBy('created_at', 'desc')->get();
+        $paketSections = PaketSection::orderBy('created_at', 'desc')->get();
+        $kontakSection = KontakSection::all()->first();
 
-        return view('pages.index', compact('heroSlides', 'mitraSections', 'dokumentasiSections',));
+        return view('pages.index', compact('heroSlides', 'mitraSections', 'dokumentasiSections', 'kontakSection', 'paketSections'));
     }
     public function sejarah()
     {
