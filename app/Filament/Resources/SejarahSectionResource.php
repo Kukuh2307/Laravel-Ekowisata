@@ -48,7 +48,7 @@ class SejarahSectionResource extends Resource
                     ->placeholder('Masukkan Deskripsi')
                      ->required()
                     ->columnSpanFull()
-                    ->rows(10),
+                    ->rows(5),
             ]);
     }
 
@@ -56,7 +56,6 @@ class SejarahSectionResource extends Resource
     {
         return $table
             ->columns([
-                Tables\Columns\ImageColumn::make('image'),
                 Tables\Columns\TextColumn::make('title')
                     ->searchable(),
                 Tables\Columns\TextColumn::make('created_at')
@@ -73,7 +72,7 @@ class SejarahSectionResource extends Resource
             ])
             ->actions([
                 Tables\Actions\EditAction::make(),
-                Tables\Actions\DeleteAction::make(),
+                // Tables\Actions\DeleteAction::make(),
             ])
             ->bulkActions([
                 Tables\Actions\BulkActionGroup::make([
@@ -87,6 +86,11 @@ class SejarahSectionResource extends Resource
         return [
             //
         ];
+    }
+
+    public static function canCreate(): bool
+    {
+        return false;
     }
 
     public static function getPages(): array

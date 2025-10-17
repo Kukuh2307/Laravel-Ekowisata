@@ -37,7 +37,7 @@ class FotoSectionResource extends Resource
                     ->default(fn ($record) => $record?->image_url),
                 Forms\Components\Textarea::make('title')
                     ->required()
-                    ->rows(4)
+                    ->rows(5)
                     ->label('Description')
                     ->columnSpanFull()
                     ->placeholder('Masukkan Deskripsi')

@@ -33,6 +33,7 @@ class HeroSectionResource extends Resource
                                 ->directory('hero_sections')
                                 ->visibility('public')
                                 ->image()
+                                ->maxSize(10480)
                                 ->imagePreviewHeight('200')
                                 ->getUploadedFileNameForStorageUsing(fn ($file) => $file->hashName())
                                 ->dehydrated(true)
@@ -48,7 +49,7 @@ class HeroSectionResource extends Resource
 
                         Forms\Components\Textarea::make('description')
                             ->label('Description')
-                            ->rows(4)
+                            ->rows(5)
                             ->required()
                             ->columnSpanFull(),
                     ])

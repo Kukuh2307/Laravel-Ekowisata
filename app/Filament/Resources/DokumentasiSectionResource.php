@@ -44,7 +44,8 @@ class DokumentasiSectionResource extends Resource
                             ->columnSpanFull()
                             ->required(),
                         Forms\Components\Textarea::make('description')
-                            ->columnSpanFull(),
+                            ->columnSpanFull()
+                            ->rows(5),
                     ])
                     ->columns(2)
                     ->columnSpanFull()

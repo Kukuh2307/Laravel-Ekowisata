@@ -43,7 +43,7 @@ class MitraSectionResource extends Resource
                             ->maxLength(255)
                             ->default(null),
                         Forms\Components\Textarea::make('description')
-                            ->rows(4)
+                            ->rows(5)
                             ->default(null)
                             ->columnSpanFull(),
                     ])

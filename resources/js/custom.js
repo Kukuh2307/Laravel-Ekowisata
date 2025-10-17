@@ -82,6 +82,108 @@ if (slides.length > 0) {
   });
 }
 
+// Hero Slide 2
+class HeroSlider {
+    constructor() {
+        this.slides = document.querySelectorAll('.hero-slide');
+        this.dots = document.querySelectorAll('.slider-dot');
+        this.prevBtn = document.getElementById('prevBtn');
+        this.nextBtn = document.getElementById('nextBtn');
+        this.currentSlide = 0;
+        this.slideCount = this.slides.length;
+        this.autoSlideInterval = null;
+        
+        this.init();
+    }
+    
+    init() {
+        // Event listeners untuk navigation
+        if (this.prevBtn) {
+            this.prevBtn.addEventListener('click', () => this.prevSlide());
+        }
+        
+        if (this.nextBtn) {
+            this.nextBtn.addEventListener('click', () => this.nextSlide());
+        }
+        
+        // Event listeners untuk dots
+        this.dots.forEach(dot => {
+            dot.addEventListener('click', () => {
+                const index = parseInt(dot.getAttribute('data-index'));
+                this.goToSlide(index);
+            });
+        });
+        
+        // Auto slide jika ada lebih dari 1 slide
+        if (this.slideCount > 1) {
+            this.startAutoSlide();
+            
+            // Pause auto slide on hover
+            const sliderSection = document.getElementById('home');
+            sliderSection.addEventListener('mouseenter', () => this.stopAutoSlide());
+            sliderSection.addEventListener('mouseleave', () => this.startAutoSlide());
+        }
+    }
+    
+    showSlide(index) {
+        // Hide all slides
+        this.slides.forEach(slide => {
+            slide.classList.remove('active');
+        });
+        
+        // Remove active class from all dots
+        this.dots.forEach(dot => {
+            dot.classList.remove('active');
+        });
+        
+        // Show current slide
+        this.slides[index].classList.add('active');
+        
+        // Activate current dot
+        if (this.dots[index]) {
+            this.dots[index].classList.add('active');
+        }
+        
+        this.currentSlide = index;
+    }
+    
+    nextSlide() {
+        const nextIndex = (this.currentSlide + 1) % this.slideCount;
+        this.showSlide(nextIndex);
+    }
+    
+    prevSlide() {
+        const prevIndex = (this.currentSlide - 1 + this.slideCount) % this.slideCount;
+        this.showSlide(prevIndex);
+    }
+    
+    goToSlide(index) {
+        if (index >= 0 && index < this.slideCount) {
+            this.showSlide(index);
+        }
+    }
+    
+    startAutoSlide() {
+        if (this.slideCount > 1) {
+            this.autoSlideInterval = setInterval(() => {
+                this.nextSlide();
+            }, 5000); // Ganti slide setiap 5 detik
+        }
+    }
+    
+    stopAutoSlide() {
+        if (this.autoSlideInterval) {
+            clearInterval(this.autoSlideInterval);
+            this.autoSlideInterval = null;
+        }
+    }
+}
+
+// Initialize slider ketika DOM siap
+document.addEventListener('DOMContentLoaded', function() {
+    new HeroSlider();
+});
+
 // === Dropdown Menu (klik) ===
 document.addEventListener('DOMContentLoaded', function () {
   const dropdownButton = document.getElementById('dropdownButton');

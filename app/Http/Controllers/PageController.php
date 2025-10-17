@@ -2,29 +2,48 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\FotoSection;
+use App\Models\HeroSection;
+use App\Models\MitraSection;
 use Illuminate\Http\Request;
+use App\Models\ProdukSection;
+use App\Models\ArtikelSection;
+use App\Models\SejarahSection;
+use App\Models\DokumentasiSection;
 
 class PageController extends Controller
 {
     public function index()
     {
-        return view('pages.index');
+        $heroSlides = HeroSection::all();
+        $mitraSections = MitraSection::all();
+        $dokumentasiSections = DokumentasiSection::orderBy('created_at', 'desc')->get();
+
+        return view('pages.index', compact('heroSlides', 'mitraSections', 'dokumentasiSections',));
     }
     public function sejarah()
     {
-        return view('pages.sejarah');
+        $sejarahSection = SejarahSection::latest()->first();
+
+        return view('pages.sejarah', compact('sejarahSection'));
     }
     public function artikel()
     {
-        return view('pages.artikel');
+        $artikelSections = ArtikelSection::orderBy('created_at', 'desc')->get();
+
+        return view('pages.artikel', compact('artikelSections'));
     }
     public function foto_gallery()
     {
-        return view('pages.foto-gallery');
+        $fotoSections = FotoSection::orderBy('created_at', 'desc')->get();
+        
+        return view('pages.foto-gallery', compact('fotoSections'));
     }
     public function produk()
     {
-        return view('pages.produk');
+        $produkSections = ProdukSection::orderBy('created_at', 'desc')->get();
+        
+        return view('pages.produk', compact('produkSections'));
     }
     public function poster()
     {
