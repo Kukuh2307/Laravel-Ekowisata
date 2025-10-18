@@ -70,7 +70,7 @@
         <!-- View All Articles Button (Optional) -->
         @if($artikelSections->count() > 0)
             <div class="text-center mt-12" data-aos="fade-up">
-                <a href="{{ route('artikel') }}" class="inline-flex items-center px-8 py-4 bg-emerald-600 hover:bg-emerald-700 text-white font-semibold rounded-lg transition-colors duration-300">
+                <a href="{{ route('artikel  ') }}" class="inline-flex items-center px-8 py-4 bg-emerald-600 hover:bg-emerald-700 text-white font-semibold rounded-lg transition-colors duration-300">
                     <span>Lihat Semua Artikel</span>
                     <i class="fas fa-arrow-right ml-2"></i>
                 </a>

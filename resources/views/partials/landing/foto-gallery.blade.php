@@ -1,6 +1,7 @@
-<!-- Gallery Section dengan Masonry Layout -->
+<!-- Gallery Section -->
 <section class="py-20 bg-white" id="foto-gallery">
     <div class="container mx-auto px-6">
+        <!-- Header -->
         <div class="text-center mb-16" data-aos="fade-up" data-aos-delay="300">
             <h2 class="text-4xl md:text-5xl font-heading font-black text-gray-800 mb-4 font-2">
                 FOTO <span class="text-emerald-600">GALLERY</span>
@@ -13,41 +14,25 @@
 
         @if($fotoSections->count() > 0)
             <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4" data-aos="flip-up" data-aos-delay="400">
-                @foreach($fotoSections as $index => $foto)
-                    @php
-                        // Untuk variasi tinggi (opsional)
-                        $heightClass = 'aspect-square';
-                        if ($index % 7 === 0) {
-                            $heightClass = 'aspect-[4/3]';
-                        } elseif ($index % 5 === 0) {
-                            $heightClass = 'aspect-[3/4]';
-                        }
-                    @endphp
-
-                    <div class="overflow-hidden rounded-lg {{ $heightClass }} group relative">
+                @foreach($fotoSections as $foto)
+                    <div class="relative overflow-hidden rounded-xl aspect-square group bg-gray-100">
                         @if($foto->image)
-                            <img src="{{ asset('storage/' . $foto->image) }}" 
-                                 alt="{{ $foto->title ?? 'Gallery Foto' }}" 
-                                 loading="lazy" 
-                                 class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500 cursor-pointer">
+                            <img src="{{ asset('storage/' . $foto->image) }}"
+                                 alt="{{ $foto->title ?? 'Gallery Foto' }}"
+                                 loading="lazy"
+                                 class="w-full h-full object-cover object-center transition-transform duration-500 group-hover:scale-110">
                         @else
-                            <div class="w-full h-full bg-gray-200 flex flex-col items-center justify-center text-gray-400 p-4">
+                            <div class="w-full h-full flex flex-col items-center justify-center text-gray-400">
                                 <i class="fas fa-image text-3xl mb-2"></i>
-                                <span class="text-sm text-center">Gambar Tidak Tersedia</span>
+                                <span class="text-sm">Gambar Tidak Tersedia</span>
                             </div>
                         @endif
-                        
-                        <!-- Overlay dengan title -->
-                        <div class="absolute inset-0 bg-black bg-opacity-0 group-hover:bg-opacity-50 transition-all duration-300 flex items-end justify-start p-3">
-                            @if($foto->title)
-                                <p class="text-white text-sm font-medium transform translate-y-4 group-hover:translate-y-0 transition-transform duration-300 opacity-0 group-hover:opacity-100 line-clamp-2">
-                                    {{ $foto->title }}
-                                </p>
-                            @else
-                                <p class="text-white text-sm font-medium transform translate-y-4 group-hover:translate-y-0 transition-transform duration-300 opacity-0 group-hover:opacity-100">
-                                    Gallery Foto
-                                </p>
-                            @endif
+
+                        <!-- Overlay -->
+                        <div class="absolute inset-0 bg-black/0 group-hover:bg-black/50 transition-all duration-300 flex items-end p-3">
+                            <p class="text-white text-sm font-medium opacity-0 translate-y-3 group-hover:opacity-100 group-hover:translate-y-0 transition-all duration-300">
+                                {{ $foto->title ?? 'Gallery Foto' }}
+                            </p>
                         </div>
                     </div>
                 @endforeach
